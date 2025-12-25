@@ -1,39 +1,132 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TIIAME Konferensiyasi 2025</title>
+  <title>TIIAME Conference 2025</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background: #ffffff;
       color: #333;
+      padding-top: 80px;
     }
     header {
       background: #0c2b66;
+      transition: all 0.3s ease;
       color: white;
-      padding: 20px 40px;
+      padding: 15px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    header.scrolled {       
+      background: rgba(12, 43, 102, 0.95);
+      backdrop-filter: blur(10px);
+    };
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .logo {
+      width: 50px;
+      height: 50px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #0c2b66;
+      font-size: 1.2rem;
     }
     header h1 {
       margin: 0;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       letter-spacing: 1px;
+    }
+    nav {
+      display: flex;
+      gap: 5px;
     }
     nav a {
       color: white;
       text-decoration: none;
-      margin-left: 20px;
+      padding: 10px 20px;
       font-size: 1rem;
       font-weight: 500;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+    nav a:hover {
+      background: rgba(255,255,255,0.1);;
+    }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+      padding: 5px 10px;
+    }
+    @media (max-width: 850px) {
+      header h1 {
+        font-size: 1rem;
+      }
+      .logo {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+      nav {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        right: 0;
+        background: #0c2b66;
+        flex-direction: column;
+        padding: 20px;
+        gap: 10px;
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: all 0.3s ease;
+        pointer-events: none;
+      }
+      nav.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+      }
+      nav a {
+        padding: 15px;
+        text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+      .menu-toggle {
+        display: block;
+      }
     }
     .hero {
       height: 500px;
-      background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      background: url('https://media.licdn.com/dms/image/v2/C5612AQEncIYfz13tnA/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1520199621457?e=2147483647&v=beta&t=3WrFyLlHECn6viHolCWyE1lCVrdxuBeyOP1kQ_zQat8') center/cover no-repeat;
       filter: blur(0px);
       position: relative;
       display: flex;
@@ -53,11 +146,13 @@
       backdrop-filter: blur(4px);
       background: rgba(0,0,0,0.45);
     }
-    .hero h2 { position: relative; z-index: 1; font-size: 3rem; max-width: 700px; text-shadow: 0 0 15px rgba(0,0,0,0.6); color: #f0f4ff; }
-    .hero h2 {
-      font-size: 2rem;
-      max-width: 700px;
-      text-shadow: 0 0 15px rgba(0,0,0,0.6);
+    .hero h2 { 
+      position: relative; 
+      z-index: 1; 
+      font-size: 2.5rem; 
+      max-width: 700px; 
+      text-shadow: 0 0 15px rgba(0,0,0,0.6); 
+      color: #f0f4ff; 
     }
     .container {
       max-width: 1100px;
@@ -87,6 +182,9 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.08);
       transition: all 0.3s ease;
       border: 1px solid #dbe2f0;
+    }
+    .speaker-card ul{
+      margin-left: 24px;
     }
     .speaker-card img {
       width: 150px;
@@ -141,7 +239,7 @@
       color: white;
       margin-top: 40px;
     }
-      .speaker-card:hover {
+    .speaker-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 12px 28px rgba(0,0,0,0.12);
     }
@@ -149,85 +247,199 @@
 </head>
 <body>
 
+<header>
+  <div class="logo-section">
+    <div class="logo">T</div>
+  </div>
+  <nav id="navbar">
+    <a href="#about">About</a>
+    <a href="#topics">Topics</a>
+    <a href="#speakers">Speakers</a>
+    <a href="#schedule">Schedule</a>
+    <a href="#submission">Submission</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+</header>
 
+<script>
+  function toggleMenu() {
+    const nav = document.getElementById('navbar');
+    nav.classList.toggle('active');
+  }
+
+  document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('navbar').classList.remove('active');
+    });
+  });
+</script>
 
 <section class="hero">
-  <h2>"Innovatsion Suv Texnologiyalari va Smart Qishloq Xo‘jaligi" Konferensiyasi</h2>
+  <h2>International Conference and International Olympiads Dedicated to World Water Day</h2>
 </section>
 
 <div class="container">
   <section class="section" id="about">
-    <h3>Konferensiya haqida</h3>
+    <h3>About the Conference</h3>
     <p>
-      Bugungi ilmiy anjuman TIIAME Milliy Tadqiqot Universitetining suv resurslari, qishloq xo‘jaligi, melioratsiya, ekologiya va smart texnologiyalarga ixtisoslashgan fakultetlar tomonidan tashkillashtirilmoqda.
-      Maqsad — innovatsion ishlanmalar, ilmiy tadqiqotlar va modernizatsiya bo‘yicha ilg‘or g‘oyalarni taqdim etish.
+      Tashkent Institute of Irrigation and Agricultural Mechanization Engineers – National Research University (TIIAME-NRU) is pleased to announce the <strong>International Scientific and Practical Conference</strong>, to be held on <strong>25–26 March 2026</strong> in Tashkent, dedicated to World Water Day.
     </p>
+    <p style="margin-top: 15px;">
+      The conference is devoted to discussing current issues of water resources management, water security under climate change, and environmental protection. Researchers, practitioners, and specialists are invited to present the results of their studies.
+    </p>
+    <div style="margin-top: 25px; padding: 20px; background: #f0f4ff; border-left: 4px solid #0c2b66; border-radius: 8px;">
+      <p><strong>📍 Location:</strong> Kary Niyaziy Street 39, Tashkent 100000, Uzbekistan</p>
+      <p style="margin-top: 10px;"><strong>🌐 Format:</strong> Hybrid (Offline and Online)</p>
+      <p style="margin-top: 10px;"><strong>🏛️ Organizer:</strong> TIIAME-NRU</p>
+    </div>
+  </section>
+
+  <section class="section" id="topics">
+    <h3>Conference Topics</h3>
+    <div class="speakers">
+      <div class="speaker-card">
+        <h4>💧 Water Resources Management and Water Security</h4>
+        <ul style="text-align: left; margin-top: 15px; line-height: 1.8;">
+          <li>Modern solutions for integrated and sustainable water resources management</li>
+          <li>Water security under climate change conditions</li>
+          <li>Protection and management of groundwater resources</li>
+          <li>Adaptation and risk management under water scarcity</li>
+          <li>Transboundary water resources management challenges</li>
+          <li>International cooperation and global water policy</li>
+        </ul>
+      </div>
+      <div class="speaker-card">
+        <h4>🌾 Agriculture and Efficient Water Use</h4>
+        <ul style="text-align: left; margin-top: 15px; line-height: 1.8;">
+          <li>Technologies for efficient water use in agriculture</li>
+          <li>Water-saving innovative irrigation methods (drip irrigation, smart irrigation)</li>
+          <li>Drainage systems and soil salinization issues</li>
+          <li>Water–Energy–Food (WEF Nexus) interlinkages</li>
+        </ul>
+      </div>
+      <div class="speaker-card">
+        <h4>💻 Digital Technologies and Innovative Monitoring</h4>
+        <ul style="text-align: left; margin-top: 15px; line-height: 1.8;">
+          <li>Digital monitoring and water quality control systems</li>
+          <li>Artificial intelligence and remote sensing technologies in water sector</li>
+          <li>Assessment of water resources based on GIS and satellite data</li>
+        </ul>
+      </div>
+      <div class="speaker-card">
+        <h4>🌍 Ecology, Infrastructure, and Sustainable Development</h4>
+        <ul style="text-align: left; margin-top: 15px; line-height: 1.8;">
+          <li>Construction of hydraulic structures and ensuring their safety</li>
+          <li>Glacier conservation and sustainable management of mountain water sources</li>
+          <li>Water and environmental issues of the Aral Sea region</li>
+          <li>Environmental education and youth engagement in water protection</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <section class="section" id="speakers">
-    <h3>Spikerlar</h3>
+    <h3>Speakers</h3>
     <div class="speakers">
       <div class="speaker-card">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" />
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Dr. Jamshid Rahimov" />
         <h4>Dr. Jamshid Rahimov</h4>
-        <p>Suv inshootlari bo‘yicha yetakchi tadqiqotchi.</p>
+        <p>Leading researcher in hydraulic structures.</p>
       </div>
       <div class="speaker-card">
-        <img src="https://randomuser.me/api/portraits/women/45.jpg" />
+        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Prof. Dilnoza Rustamova" />
         <h4>Prof. Dilnoza Rustamova</h4>
-        <p>Aqlli qishloq xo‘jaligi bo‘yicha ekspert.</p>
+        <p>Expert in smart agriculture.</p>
       </div>
       <div class="speaker-card">
-        <img src="https://randomuser.me/api/portraits/men/75.jpg" />
+        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Dr. Azizbek Toshmatov" />
         <h4>Dr. Azizbek Toshmatov</h4>
-        <p>Ekologiya va resurslarni boshqarish mutaxassisi.</p>
+        <p>Specialist in ecology and resource management.</p>
       </div>
     </div>
   </section>
 
   <section class="section" id="schedule">
-    <h3>Dastur</h3>
+    <h3>Conference Schedule</h3>
+    <p style="margin-bottom: 20px; font-size: 1.1rem;">📅 <strong>March 25-26, 2026</strong></p>
     <div class="schedule">
       <table>
-        <tr><th>Vaqt</th><th>Faoliyat</th><th>Mas’ul</th></tr>
-        <tr><td>09:00–09:30</td><td>Ro‘yxatdan o‘tish</td><td>Tashkiliy qo‘mita</td></tr>
-        <tr><td>09:30–10:00</td><td>Ochilish marosimi</td><td>Rektor</td></tr>
-        <tr><td>10:00–11:00</td><td>Asosiy ma’ruzalar</td><td>Spikerlar</td></tr>
-        <tr><td>11:00–12:00</td><td>Panel muhokama</td><td>Mutaxassislar guruhi</td></tr>
-        <tr><td>12:00–13:00</td><td>Tushlik</td><td>—</td></tr>
-        <tr><td>13:00–15:00</td><td>Talabalar taqdimoti</td><td>TIIAME Talabalari</td></tr>
+        <tr><th>Time</th><th>Activity</th><th>Responsible</th></tr>
+        <tr><td>09:00–09:30</td><td>Registration</td><td>Organizing Committee</td></tr>
+        <tr><td>09:30–10:00</td><td>Opening Ceremony</td><td>Rector</td></tr>
+        <tr><td>10:00–11:00</td><td>Keynote Presentations</td><td>Speakers</td></tr>
+        <tr><td>11:00–12:00</td><td>Panel Discussion</td><td>Expert Group</td></tr>
+        <tr><td>12:00–13:00</td><td>Lunch Break</td><td>–</td></tr>
+        <tr><td>13:00–15:00</td><td>Student Presentations & International Olympiads</td><td>TIIAME Students</td></tr>
       </table>
     </div>
   </section>
 
-  <section class="section">
-    <h3>KONFERENSIYANING ASOSIY YO‘NALISHLARI (SEKSIYALARI)</h3>
+  <section class="section" id="tracks">
+    <h3>Why Attend?</h3>
     <div class="speakers">
-      <div class="speaker-card"><h4>Suv Resurslarini Boshqarish</h4><p>Suv ta'minoti, gidrotexnika inshootlari va suvni tejovchi texnologiyalar bo‘yicha ilmiy izlanishlar.</p></div>
-      <div class="speaker-card"><h4>Smart Qishloq Xo‘jaligi</h4><p>Raqamli monitoring, IoT sensorlar va aqlli agrotexnologiyalar.</p></div>
-      <div class="speaker-card"><h4>Melioratsiya va Drenaj Tizimlari</h4><p>Yerlarni qayta tiklash, sho‘rlanishni kamaytirish va samarali drenaj yechimlari.</p></div>
-      <div class="speaker-card"><h4>Ekologiya va Barqaror Rivojlanish</h4><p>Atrof-muhit monitoringi, chiqindi boshqaruvi va yashil energetika g‘oyalari.</p></div>
+      <div class="speaker-card">
+        <h4>🤝 Network with Experts</h4>
+        <p>Connect with leading researchers, practitioners, and specialists in water resources management from around the world.</p>
+      </div>
+      <div class="speaker-card">
+        <h4>🎓 Share Your Research</h4>
+        <p>Present your innovative research and gain valuable feedback from the international scientific community.</p>
+      </div>
+      <div class="speaker-card">
+        <h4>🌐 Hybrid Format</h4>
+        <p>Participate either in-person in Tashkent or join online from anywhere in the world.</p>
+      </div>
+      <div class="speaker-card">
+        <h4>🏆 International Olympiads</h4>
+        <p>Engage in competitive academic challenges and showcase your expertise in water-related fields.</p>
+      </div>
     </div>
   </section>
 
   <section class="section" id="submission">
-    <h3>Maqola yuborish tartibi</h3>
-    <p>Konferensiya uchun maqolalar quyidagi talablarga muvofiq bo‘lishi kerak:</p>
-    <ul>
-      <li>Hajmi: 5–10 sahifa (PDF yoki DOCX formatida).</li>
-      <li>Matn: Times New Roman, 12 pt, 1.5 interval.</li>
-      <li>Annotatsiya: 150–250 so‘z.</li>
-      <li>Kalit so‘zlar: kamida 5 ta.</li>
-      <li>Rasm va jadvallar izohli bo‘lishi shart.</li>
-    </ul>
-    <p><strong>Maqolalarni yuborish uchun email:</strong></p>
-    <p style="font-size:1.2rem; color:#0c2b66; font-weight:bold;">conference@tiiame.uz</p>
+    <h3>Paper Submission Guidelines</h3>
+    <div style="background: #f0f4ff; padding: 25px; border-radius: 12px; margin-bottom: 20px;">
+      <p style="font-size: 1.1rem; color: #0c2b66; font-weight: 600;">📅 Important Deadline: 20 February 2026</p>
+    </div>
+    <div style="margin-top: 25px; text-align: center;">
+      <p style="margin-bottom: 15px;"><strong>Download Article Template:</strong></p>
+      <a href="https://bit.ly/4prFN5g" target="_blank" style="display: inline-block; background: #0c2b66; color: white; padding: 12px 30px; border-radius: 6px; text-decoration: none; font-weight: 600;">📄 Download Template</a>
+    </div>
+    <div style="margin-top: 25px; text-align: center;">
+      <p style="margin-bottom: 15px;"><strong>Register for the Conference:</strong></p>
+      <a href="https://forms.gle/HbNswev36W7DSQqc7" target="_blank" style="display: inline-block; background: #28a745; color: white; padding: 15px 40px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 1.1rem;">✍️ Register Now</a>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <h3>Contact Information</h3>
+    <div class="speakers">
+      <div class="speaker-card">
+        <h4>📧 Email</h4>
+        <p style="font-size: 1.1rem; color: #0c2b66; font-weight: bold; margin-top: 15px;">waterday2026@gmail.com</p>
+      </div>
+      <div class="speaker-card">
+        <h4>📱 Phone / WhatsApp</h4>
+        <p style="font-size: 1.1rem; color: #0c2b66; font-weight: bold; margin-top: 15px;">+998 93 398 99 11</p>
+      </div>
+      <div class="speaker-card">
+        <h4>🌐 Conference Website</h4>
+        <p style="margin-top: 15px;">
+          <a href="https://water-day.tiiame.uz/" target="_blank" style="color: #0c2b66; font-weight: 600; text-decoration: underline;">water-day.tiiame.uz</a>
+        </p>
+      </div>
+    </div>
+    <div style="margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #0c2b66, #1a4d99); color: white; border-radius: 12px; text-align: center;">
+      <h4 style="font-size: 1.5rem; margin-bottom: 15px;">🌊 WE LOOK FORWARD TO WELCOMING YOU!</h4>
+      <p style="font-size: 1.1rem;">Join us in shaping the future of water resources management</p>
+    </div>
   </section>
 
 </div>
 
 <footer>
-  © 2025 TIIAME Milliy Tadqiqot Universiteti
+  © 2025 TIIAME National Research University
 </footer>
 
 </body>
