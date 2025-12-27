@@ -181,6 +181,9 @@
       transition: all 0.3s ease;
       border: 1px solid #dbe2f0;
     }
+    .speaker-card ul{
+        margin-left: 25px;
+    }
     .speaker-card img {
       width: 150px;
       height: 150px;
