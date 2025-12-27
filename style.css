@@ -1,0 +1,240 @@
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #ffffff;
+      color: #333;
+      padding-top: 80px;
+    }
+    header {
+      background: #0c2b66;
+      color: white;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    header.scrolled {
+      background: rgba(12, 43, 102, 0.95);
+      backdrop-filter: blur(10px);
+    }
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .logo {
+      width: 50px;
+      height: 50px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #0c2b66;
+      font-size: 1.2rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.3rem;
+      letter-spacing: 1px;
+    }
+    nav {
+      display: flex;
+      gap: 5px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: 500;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+    nav a:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+      padding: 5px 10px;
+    }
+    @media (max-width: 900px) {
+      header h1 {
+        font-size: 1rem;
+      }
+      .logo {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+      nav {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        right: 0;
+        background: #0c2b66;
+        flex-direction: column;
+        padding: 20px;
+        gap: 10px;
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: all 0.3s ease;
+        pointer-events: none;
+      }
+      nav.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+      }
+      nav a {
+        padding: 15px;
+        text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+      .menu-toggle {
+        display: block;
+      }
+    }
+    .hero {
+      height: 500px;
+      background: url('https://media.licdn.com/dms/image/v2/C5612AQEncIYfz13tnA/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1520199621457?e=2147483647&v=beta&t=3WrFyLlHECn6viHolCWyE1lCVrdxuBeyOP1kQ_zQat8') center/cover no-repeat;
+      filter: blur(0px);
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+    }
+
+    @media (max-width: 850px) {
+      .hero {
+        background-position: 65% center;
+      }
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(4px);
+      background: rgba(0,0,0,0.45);
+    }
+    .hero h2 { 
+      position: relative; 
+      z-index: 1; 
+      font-size: 2.5rem; 
+      max-width: 700px; 
+      text-shadow: 0 0 15px rgba(0,0,0,0.6); 
+      color: #f0f4ff; 
+    }
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+    h3 {
+      font-size: 2rem;
+      color: #0c2b66;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .section {
+      margin-bottom: 60px;
+    }
+    .speakers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+    .speaker-card {
+      background: linear-gradient(145deg, #f0f4ff, #ffffff);
+      border-radius: 16px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      border: 1px solid #dbe2f0;
+    }
+    .speaker-card img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 4px solid #0c2b66;
+    }
+    .schedule table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    .schedule th,
+    .schedule td {
+      padding: 15px;
+      border-bottom: 1px solid #ddd;
+    }
+    .schedule th {
+      background: #0c2b66;
+      color: white;
+      font-weight: 600;
+    }
+    .registration {
+      background: #eef2f7;
+      padding: 30px;
+      border-radius: 12px;
+    }
+    .registration input,
+    .registration textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    button {
+      background: #0c2b66;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #0c2b66;
+      color: white;
+      margin-top: 40px;
+    }
+    .speaker-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+    }

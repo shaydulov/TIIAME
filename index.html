@@ -4,246 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TIIAME Conference 2025</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    html {
-      scroll-behavior: smooth;
-    }
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #ffffff;
-      color: #333;
-      padding-top: 80px;
-    }
-    header {
-      background: #0c2b66;
-      transition: all 0.3s ease;
-      color: white;
-      padding: 15px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    header.scrolled {       
-      background: rgba(12, 43, 102, 0.95);
-      backdrop-filter: blur(10px);
-    };
-
-    .logo-section {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    .logo {
-      width: 50px;
-      height: 50px;
-      background: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      color: #0c2b66;
-      font-size: 1.2rem;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 1.3rem;
-      letter-spacing: 1px;
-    }
-    nav {
-      display: flex;
-      gap: 5px;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      padding: 10px 20px;
-      font-size: 1rem;
-      font-weight: 500;
-      border-radius: 6px;
-      transition: all 0.3s ease;
-    }
-    nav a:hover {
-      background: rgba(255,255,255,0.1);;
-    }
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.8rem;
-      cursor: pointer;
-      padding: 5px 10px;
-    }
-    @media (max-width: 850px) {
-      header h1 {
-        font-size: 1rem;
-      }
-      .logo {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-      }
-      nav {
-        position: fixed;
-        top: 80px;
-        left: 0;
-        right: 0;
-        background: #0c2b66;
-        flex-direction: column;
-        padding: 20px;
-        gap: 10px;
-        transform: translateY(-100%);
-        opacity: 0;
-        transition: all 0.3s ease;
-        pointer-events: none;
-      }
-      nav.active {
-        transform: translateY(0);
-        opacity: 1;
-        pointer-events: all;
-      }
-      nav a {
-        padding: 15px;
-        text-align: center;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
-      }
-      .menu-toggle {
-        display: block;
-      }
-    }
-    .hero {
-      height: 500px;
-      background: url('https://media.licdn.com/dms/image/v2/C5612AQEncIYfz13tnA/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1520199621457?e=2147483647&v=beta&t=3WrFyLlHECn6viHolCWyE1lCVrdxuBeyOP1kQ_zQat8') center/cover no-repeat;
-      filter: blur(0px);
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: white;
-      padding: 20px;
-    }
-    .hero::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      backdrop-filter: blur(4px);
-      background: rgba(0,0,0,0.45);
-    }
-    .hero h2 { 
-      position: relative; 
-      z-index: 1; 
-      font-size: 2.5rem; 
-      max-width: 700px; 
-      text-shadow: 0 0 15px rgba(0,0,0,0.6); 
-      color: #f0f4ff; 
-    }
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 40px 20px;
-    }
-    h3 {
-      font-size: 2rem;
-      color: #0c2b66;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .section {
-      margin-bottom: 60px;
-    }
-    .speakers {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 30px;
-    }
-    .speaker-card {
-      background: linear-gradient(145deg, #f0f4ff, #ffffff);
-      border-radius: 16px;
-      padding: 25px;
-      text-align: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      transition: all 0.3s ease;
-      border: 1px solid #dbe2f0;
-    }
-    .speaker-card ul{
-      margin-left: 24px;
-    }
-    .speaker-card img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 15px;
-      border: 4px solid #0c2b66;
-    }
-    .schedule table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
-    .schedule th,
-    .schedule td {
-      padding: 15px;
-      border-bottom: 1px solid #ddd;
-    }
-    .schedule th {
-      background: #0c2b66;
-      color: white;
-      font-weight: 600;
-    }
-    .registration {
-      background: #eef2f7;
-      padding: 30px;
-      border-radius: 12px;
-    }
-    .registration input,
-    .registration textarea {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
-    }
-    button {
-      background: #0c2b66;
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 6px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #0c2b66;
-      color: white;
-      margin-top: 40px;
-    }
-    .speaker-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.12);
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -253,50 +14,83 @@
   </div>
   <nav id="navbar">
     <a href="#about">About</a>
+    <!-- <a href="#events">Events</a> -->
     <a href="#topics">Topics</a>
     <a href="#speakers">Speakers</a>
-    <a href="#schedule">Schedule</a>
+    <a href="#venue">Venue</a>
+    <a href="#program">Program</a>
     <a href="#submission">Submission</a>
     <a href="#contact">Contact</a>
   </nav>
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
 </header>
-
-<script>
-  function toggleMenu() {
-    const nav = document.getElementById('navbar');
-    nav.classList.toggle('active');
-  }
-
-  document.querySelectorAll('nav a').forEach(link => {
-    link.addEventListener('click', () => {
-      document.getElementById('navbar').classList.remove('active');
-    });
-  });
-</script>
-
 <section class="hero">
-  <h2>International Conference and International Olympiads Dedicated to World Water Day</h2>
+  <div>
+    <h2>International Conference and International Olympiads Dedicated to World Water Day</h2>
+    <div class="hero_2p">
+      <p style="font-size: 1.2rem; margin-top: 15px; position: relative; z-index: 1;">Innovative Approaches to Water Resources Management</p>
+      <p style="font-size: 1rem; margin-top: 10px; position: relative; z-index: 1;">25–26 March 2026 | Tashkent, Uzbekistan</p>
+    </div>
+  </div>
 </section>
 
 <div class="container">
   <section class="section" id="about">
     <h3>About the Conference</h3>
     <p>
-      Tashkent Institute of Irrigation and Agricultural Mechanization Engineers – National Research University (TIIAME-NRU) is pleased to announce the <strong>International Scientific and Practical Conference</strong>, to be held on <strong>25–26 March 2026</strong> in Tashkent, dedicated to World Water Day.
+      Water is the foundation of life, food security, and economic development. Today, <strong>climate change</strong>, glacier retreat, shifting precipitation patterns, and rapid population growth are intensifying <strong>water scarcity</strong> and <strong>water quality</strong> challenges. Therefore, conserving water and managing water resources on a scientific basis remain among the world's most urgent priorities.
     </p>
     <p style="margin-top: 15px;">
-      The conference is devoted to discussing current issues of water resources management, water security under climate change, and environmental protection. Researchers, practitioners, and specialists are invited to present the results of their studies.
+      <strong>World Water Day (22 March)</strong> is observed to raise public awareness of these challenges, highlight the value of water, and strengthen global cooperation on water security. The day was proclaimed by the <strong>United Nations General Assembly in 1993</strong> and has since served as an international platform for dialogue and action on water-related issues.
     </p>
-    <div style="margin-top: 25px; padding: 20px; background: #f0f4ff; border-left: 4px solid #0c2b66; border-radius: 8px;">
-      <p><strong>📍 Location:</strong> Kary Niyaziy Street 39, Tashkent 100000, Uzbekistan</p>
-      <p style="margin-top: 10px;"><strong>🌐 Format:</strong> Hybrid (Offline and Online)</p>
-      <p style="margin-top: 10px;"><strong>🏛️ Organizer:</strong> TIIAME-NRU</p>
+    <p style="margin-top: 15px;">
+      TIIAME NRU's historical mission is closely linked to the water sector. The university was established to train engineering professionals for <strong>irrigation, drainage (melioration), and water management</strong>, and this remains one of its key priorities today. For this reason, <strong>World Water Day events have become an annual tradition at TIIAME NRU</strong>.
+    </p>
+    <div style="margin-top: 25px; padding: 25px; background: linear-gradient(135deg, #0c2b66, #1a4d99); color: white; border-radius: 12px; text-align: center;">
+      <h4 style="font-size: 1.3rem; margin-bottom: 10px;">💧 Save water and save life!</h4>
+    </div>
+  </section>
+
+  <section class="section" id="events">
+    <h3>World Water Day Events at TIIAME NRU</h3>
+    <p style="margin-bottom: 30px;">
+      Each year, the central element of these initiatives is a <strong>scientific and practical conference</strong>, where participants discuss water resources management, water-saving technologies, climate-risk adaptation, environmental sustainability, and innovative solutions. The programme continues with <strong>competitions, olympiads, panel discussions, technology exhibitions, and youth-led initiatives</strong>.
+    </p>
+    
+    <h4 style="color: #0c2b66; font-size: 1.5rem; margin-bottom: 20px;">📅 Past Events</h4>
+    
+    <div style="margin-bottom: 30px; padding: 20px; background: #f9fbff; border-radius: 12px; border-left: 4px solid #28a745;">
+      <h5 style="color: #0c2b66; font-size: 1.2rem; margin-bottom: 10px;">2025 - "Save Our Glaciers"</h5>
+      <p>TIIAME NRU organized a World Water Day week featuring educational outreach activities and competitions. Events included a team quiz on glacier protection ("What can young people do to protect glaciers?"), social videos/animations encouraging water conservation, posters and photo works, and a technology exhibition on <strong>innovations in water sector development</strong>. Winners were recognized with valuable prizes and monetary awards.</p>
+    </div>
+
+    <div style="margin-bottom: 30px; padding: 20px; background: #f9fbff; border-radius: 12px; border-left: 4px solid #007bff;">
+      <h5 style="color: #0c2b66; font-size: 1.2rem; margin-bottom: 10px;">2024 - "Water for Peace"</h5>
+      <p>Activities emphasized the vital importance of water and the growing risks related to global warming, glacier retreat, environmental pollution, and water scarcity. Students participated in multiple competition formats (videos, quizzes, essays, and innovation showcases). A dedicated roundtable discussion addressed improving irrigation water-use efficiency, expanding water-saving methods such as drip irrigation, and using alternative water sources responsibly. The programme included a presentation of an <strong>underground drip irrigation system</strong> developed by "ECOSUV."</p>
+    </div>
+
+    <div style="margin-bottom: 30px; padding: 20px; background: #f9fbff; border-radius: 12px; border-left: 4px solid #ffc107;">
+      <h5 style="color: #0c2b66; font-size: 1.2rem; margin-bottom: 10px;">2023 - "Accelerating Change"</h5>
+      <p>World Water Day was widely celebrated with the participation of university leadership, sector representatives, and international partners. Activities included a scientific essay competition, youth debate ("What can young people do?"), creative videos promoting water conservation, poster/photo submissions, and a technology exhibition focused on innovative ideas and solutions. Active participants and winners received various awards and prizes.</p>
+    </div>
+
+    <div style="margin-bottom: 30px; padding: 20px; background: #f9fbff; border-radius: 12px; border-left: 4px solid #dc3545;">
+      <h5 style="color: #0c2b66; font-size: 1.2rem; margin-bottom: 10px;">2022 - "Groundwater"</h5>
+      <p>Activities focused on rational water resource management and the pressing challenge of water scarcity. A key feature was the organization of competitions involving students from universities in <strong>Kyrgyzstan, Tajikistan, and Uzbekistan</strong>, with winners receiving prizes such as laptops, tablets, smartphones, and other awards.</p>
+    </div>
+
+    <h4 style="color: #0c2b66; font-size: 1.5rem; margin-bottom: 20px; margin-top: 40px;">🎯 Upcoming Event 2026</h4>
+    <div style="padding: 25px; background: linear-gradient(135deg, #28a745, #20c997); color: white; border-radius: 12px;">
+      <h5 style="font-size: 1.3rem; margin-bottom: 15px;">🌊 "Innovative Approaches to Water Resources Management"</h5>
+      <p style="margin-bottom: 10px;">The World Water Day initiatives at TIIAME NRU will continue on an even larger scale and with broader coverage. The event will feature an <strong>International Scientific and Practical Conference</strong> and <strong>International Olympiads</strong>.</p>
+      <p><strong>📅 Date:</strong> 25–26 March 2026 | <strong>📍 Venue:</strong> TIIAME NRU, Tashkent</p>
+      <p style="margin-top: 10px;">The 2026 programme will emphasize international networking, knowledge exchange, and support for youth-led innovations in the water sector.</p>
     </div>
   </section>
 
   <section class="section" id="topics">
     <h3>Conference Topics</h3>
+    <p style="margin-bottom: 30px;">The International Conference dedicated to World Water Day will focus on priority areas of sustainable water management, climate resilience, innovation, and environmental protection. Participants are invited to submit and present research findings and practical results within the following themes:</p>
     <div class="speakers">
       <div class="speaker-card">
         <h4>💧 Water Resources Management and Water Security</h4>
@@ -340,39 +134,121 @@
 
   <section class="section" id="speakers">
     <h3>Speakers</h3>
+    <p style="margin-bottom: 25px;">
+      The conference will feature invited speakers and experts from academia, government agencies, international organizations, and industry. They will share practical experience and research insights on water security under climate change, sustainable water resources management, digital monitoring, and innovative solutions for the water sector.
+    </p>
+    
+    <div style="background: #fff3cd; padding: 20px; border-radius: 12px; border-left: 4px solid #ffc107; margin-bottom: 30px;">
+      <p style="font-size: 1.1rem; color: #856404;"><strong>📢 Updates:</strong> The speaker lineup is currently being formed. As confirmations are received, this page will be updated regularly with new speakers, affiliations, talk titles, and the session schedule. Please check back often for the latest updates.</p>
+    </div>
+
+    <h4 style="color: #0c2b66; font-size: 1.3rem; margin-bottom: 20px;">🎤 Keynote Speakers</h4>
+    <p style="margin-bottom: 25px;">A selected group of keynote speakers will deliver plenary talks highlighting global and regional priorities, policy directions, and cutting-edge research in water management and environmental protection.</p>
+
+    <h4 style="color: #0c2b66; font-size: 1.3rem; margin-bottom: 20px; margin-top: 30px;">👥 Invited Expert Speakers</h4>
+    <p style="margin-bottom: 20px;">Invited experts will contribute to thematic sessions covering:</p>
+    
     <div class="speakers">
       <div class="speaker-card">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Dr. Jamshid Rahimov" />
-        <h4>Dr. Jamshid Rahimov</h4>
-        <p>Leading researcher in hydraulic structures.</p>
+        <h4>💧 Water Resources Management & Water Security</h4>
+        <p>Expert insights on integrated water management, climate adaptation, and policy frameworks.</p>
       </div>
       <div class="speaker-card">
-        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Prof. Dilnoza Rustamova" />
-        <h4>Prof. Dilnoza Rustamova</h4>
-        <p>Expert in smart agriculture.</p>
+        <h4>🌾 Agriculture & Efficient Water Use</h4>
+        <p>Innovative irrigation technologies and sustainable agricultural practices.</p>
       </div>
       <div class="speaker-card">
-        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Dr. Azizbek Toshmatov" />
-        <h4>Dr. Azizbek Toshmatov</h4>
-        <p>Specialist in ecology and resource management.</p>
+        <h4>💻 Digital Technologies & Innovative Monitoring</h4>
+        <p>AI, remote sensing, and GIS applications in water sector management.</p>
       </div>
+      <div class="speaker-card">
+        <h4>🌍 Ecology, Infrastructure & Sustainable Development</h4>
+        <p>Hydraulic infrastructure, environmental protection, and youth engagement.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="venue">
+    <h3>Venue & Location</h3>
+    <p style="margin-bottom: 25px;">
+      The International Scientific and Practical Conference dedicated to World Water Day will be held in Tashkent, Uzbekistan, at TIIAME NRU.
+    </p>
+    
+    <div style="background: #f0f4ff; padding: 25px; border-radius: 12px; margin-bottom: 30px;">
+      <p style="margin-bottom: 10px;"><strong>📍 Address:</strong> 39 Kori Niyazov Street, Tashkent 100000, Uzbekistan</p>
+      <p style="margin-bottom: 10px;"><strong>🌐 Format:</strong> Hybrid (offline and online)</p>
+      <p><strong>🏛️ Venue:</strong> TIIAME-NRU Campus</p>
+    </div>
+
+    <div class="speakers">
+      <div class="speaker-card">
+        <h4>🏢 On-site Participation</h4>
+        <p>The main sessions will take place on the TIIAME NRU campus. Registered participants will receive detailed information about the conference halls, registration desk, and on-site navigation in advance.</p>
+      </div>
+      <div class="speaker-card">
+        <h4>💻 Online Participation</h4>
+        <p>Participants who choose the online format will receive access links and technical instructions before the event. Selected sessions may be streamed live.</p>
+      </div>
+      <div class="speaker-card">
+        <h4>🚕 Getting There</h4>
+        <p>TIIAME NRU is located in central Tashkent and is accessible by public transport and taxi services. Further guidance (maps, entrances, and parking information) will be published closer to the event date.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="program">
+    <h3>Conference Program</h3>
+    <p style="margin-bottom: 20px; font-size: 1.1rem;">📅 <strong>March 25-26, 2026</strong></p>
+    <p style="margin-bottom: 25px; font-style: italic; color: #666;">Note: This agenda is preliminary and may be updated as speakers and sessions are confirmed.</p>
+    
+    <h4 style="color: #0c2b66; font-size: 1.5rem; margin-bottom: 20px; margin-top: 30px;">Day 1 — 25 March 2026</h4>
+    <div class="schedule">
+      <table>
+        <tr><th>Time</th><th>Session / Activity</th><th>Details</th></tr>
+        <tr><td>09:00–10:00</td><td>Registration of participants</td><td>Refreshing coffee/tea</td></tr>
+        <tr><td>10:00–10:50</td><td>Opening Ceremony</td><td>Welcome remarks; greetings from partners; group photo</td></tr>
+        <tr><td>10:50–11:10</td><td>Coffee break & networking</td><td>—</td></tr>
+        <tr><td>11:10–12:35</td><td>Plenary Session I (Keynote presentations)</td><td>Moderator introduction; Keynote 1; Keynote 2; Q&A</td></tr>
+        <tr><td>12:35–13:30</td><td>Lunch break</td><td>—</td></tr>
+        <tr><td>13:30–15:00</td><td>Thematic Session I</td><td>Success & Challenges / Practice & Case Studies</td></tr>
+        <tr><td>15:00–16:00</td><td>Poster Session / Tech Exhibition</td><td>Afternoon coffee; networking</td></tr>
+        <tr><td>16:00–17:30</td><td>Panel / Roundtable Discussion</td><td>Policy–Science–Practice</td></tr>
+        <tr><td>17:30–18:00</td><td>Wrap-up of Day 1</td><td>—</td></tr>
+      </table>
+    </div>
+
+    <h4 style="color: #0c2b66; font-size: 1.5rem; margin-bottom: 20px; margin-top: 40px;">Day 2 — 26 March 2026</h4>
+    <div class="schedule">
+      <table>
+        <tr><th>Time</th><th>Session / Activity</th><th>Details</th></tr>
+        <tr><td>10:00–11:20</td><td>Parallel Sessions block 1</td><td>4 tracks run in parallel</td></tr>
+        <tr><td>11:20–11:40</td><td>Coffee break</td><td>—</td></tr>
+        <tr><td>11:40–13:10</td><td>Parallel Sessions block 2</td><td>Sessions 1–4 continue</td></tr>
+        <tr><td>13:10–14:10</td><td>Lunch break</td><td>—</td></tr>
+        <tr><td>14:20–15:20</td><td>Parallel Sessions (continued)</td><td>Presentation time: 15 min + 5 min Q&A</td></tr>
+        <tr><td>15:40–16:00</td><td>Coffee break</td><td>—</td></tr>
+        <tr><td>16:00–17:30</td><td>Closing Plenary Session</td><td>Section summaries & recommendations</td></tr>
+        <tr><td>17:30–18:00</td><td>Awards Ceremony & Final Closing</td><td>Best Paper / Best Poster + Olympiad winners' awards; group photo</td></tr>
+      </table>
+    </div>
+
+    <div style="margin-top: 30px; padding: 20px; background: #f0f4ff; border-left: 4px solid #0c2b66; border-radius: 8px;">
+      <h4 style="color: #0c2b66; margin-bottom: 15px;">📋 Parallel Session Tracks (Day 2):</h4>
+      <ul style="line-height: 2;">
+        <li><strong>Session 1:</strong> Water Resources Management and Water Security</li>
+        <li><strong>Session 2:</strong> Agriculture and Efficient Water Use</li>
+        <li><strong>Session 3:</strong> Digital Technologies and Innovative Monitoring</li>
+        <li><strong>Session 4:</strong> Ecology, Infrastructure, and Sustainable Development</li>
+      </ul>
+      <p style="margin-top: 15px; font-style: italic; color: #666;">
+        <strong>Olympiad note:</strong> Olympiad rounds are conducted before March 25 (online/offline). On March 26, only the awards ceremony will be held.
+      </p>
     </div>
   </section>
 
   <section class="section" id="schedule">
     <h3>Conference Schedule</h3>
-    <p style="margin-bottom: 20px; font-size: 1.1rem;">📅 <strong>March 25-26, 2026</strong></p>
-    <div class="schedule">
-      <table>
-        <tr><th>Time</th><th>Activity</th><th>Responsible</th></tr>
-        <tr><td>09:00–09:30</td><td>Registration</td><td>Organizing Committee</td></tr>
-        <tr><td>09:30–10:00</td><td>Opening Ceremony</td><td>Rector</td></tr>
-        <tr><td>10:00–11:00</td><td>Keynote Presentations</td><td>Speakers</td></tr>
-        <tr><td>11:00–12:00</td><td>Panel Discussion</td><td>Expert Group</td></tr>
-        <tr><td>12:00–13:00</td><td>Lunch Break</td><td>–</td></tr>
-        <tr><td>13:00–15:00</td><td>Student Presentations & International Olympiads</td><td>TIIAME Students</td></tr>
-      </table>
-    </div>
+    <p style="margin-bottom: 20px;">Please refer to the detailed <a href="#program" style="color: #0c2b66; font-weight: 600; text-decoration: underline;">Conference Program</a> section above for the full agenda.</p>
   </section>
 
   <section class="section" id="tracks">
@@ -414,6 +290,7 @@
 
   <section class="section" id="contact">
     <h3>Contact Information</h3>
+    <p style="margin-bottom: 25px;">For questions and inquiries, please contact the Organizing Committee:</p>
     <div class="speakers">
       <div class="speaker-card">
         <h4>📧 Email</h4>
@@ -424,10 +301,8 @@
         <p style="font-size: 1.1rem; color: #0c2b66; font-weight: bold; margin-top: 15px;">+998 93 398 99 11</p>
       </div>
       <div class="speaker-card">
-        <h4>🌐 Conference Website</h4>
-        <p style="margin-top: 15px;">
-          <a href="https://water-day.tiiame.uz/" target="_blank" style="color: #0c2b66; font-weight: 600; text-decoration: underline;">water-day.tiiame.uz</a>
-        </p>
+        <h4>📍 Address</h4>
+        <p style="margin-top: 15px; line-height: 1.6;">39 Kori Niyazov Street,<br>Tashkent 100000, Uzbekistan<br>(TIIAME NRU)</p>
       </div>
     </div>
     <div style="margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #0c2b66, #1a4d99); color: white; border-radius: 12px; text-align: center;">
@@ -441,6 +316,28 @@
 <footer>
   © 2025 TIIAME National Research University
 </footer>
-
 </body>
+<script>
+  function toggleMenu() {
+    const nav = document.getElementById('navbar');
+    nav.classList.toggle('active');
+  }
+  
+  // Close menu
+  document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('navbar').classList.remove('active');
+    });
+  });
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+</script>
 </html>
